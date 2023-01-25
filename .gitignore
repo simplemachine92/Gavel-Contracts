@@ -10,3 +10,4 @@ out/
 # Dotenv file
 .env
 foundry.toml
+broadcast/Liqqer.s.sol/1
