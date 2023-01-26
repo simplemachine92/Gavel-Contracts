@@ -34,6 +34,8 @@ interface ILiqqer {
         uint256 collatToReceive;
         ZeroSwap[] swaps;
     }
+
+    function addApprovals(address _token, address _guy) external;
 }
 
 interface IWETH {

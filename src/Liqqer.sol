@@ -27,7 +27,7 @@ contract Liqqer is Owned {
     address private immutable mySafe =
         0x3224C6C9BCA033CAbB85A36891EBf994732d8f23;
 
-    address[] private _debtTokens = [
+    /* address[] private _debtTokens = [
         0xdAC17F958D2ee523a2206206994597C13D831ec7,
         0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599,
         0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2,
@@ -75,10 +75,10 @@ contract Liqqer is Owned {
         0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72,
         0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B,
         0x111111111117dC0aa78b770fA6A738034120C302
-    ];
+    ]; */
 
     constructor(address _owner) Owned(_owner) {
-        for (uint256 i = 0; i < _debtTokens.length; i++) {
+        /* for (uint256 i = 0; i < _debtTokens.length; i++) {
             IERC20 DTOKEN = IERC20(_debtTokens[i]);
             DTOKEN.safeApprove(address(AAVE), MAX_INT);
         }
@@ -86,7 +86,7 @@ contract Liqqer is Owned {
         for (uint256 g = 0; g < _collatTokens.length; g++) {
             IERC20 CTOKEN = IERC20(_collatTokens[g]);
             CTOKEN.safeApprove(address(zeroX), MAX_INT);
-        }
+        } */
     }
 
     function flash_WaC(ILiqqer.CallParams calldata params) external onlyOwner {
@@ -99,7 +99,7 @@ contract Liqqer is Owned {
     function onFlashLoan(bytes calldata data) external {
         require(msg.sender == address(EulerAddrsMainnet.euler), "not allowed");
         // We still need this to protect our funds, but we can't set tx.origin in forge tests
-        /* if (tx.origin != owner) revert UnAuthOrigin(); */
+        if (tx.origin != owner) revert UnAuthOrigin();
 
         ILiqqer.CallParams memory params = abi.decode(
             data,
